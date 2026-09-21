@@ -28,3 +28,12 @@ For a production build:
 npm run build
 npm run preview
 ```
+
+## Deploy to Cloudflare Pages
+
+Use these Pages build settings:
+
+- Build command: `npm run build`
+- Build output directory: `dist`
+
+The repository includes `wrangler.toml` with the same output directory for Cloudflare deployments. Do not publish the repository root, because that serves the untransformed JSX source.
