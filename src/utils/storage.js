@@ -1,7 +1,7 @@
 export const STORAGE_KEYS = {
-  history: 'coderush_race_history',
-  settings: 'coderush_settings',
-  stats: 'coderush_user_stats',
+  history: 'language_typing_race_history',
+  settings: 'language_typing_settings',
+  stats: 'language_typing_user_stats',
 };
 
 export const DEFAULT_SETTINGS = {
