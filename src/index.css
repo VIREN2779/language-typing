@@ -1,53 +1,226 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  color-scheme: dark;
+}
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+* {
+  box-sizing: border-box;
+}
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  min-width: 320px;
+  background: #050a12;
+}
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #050a12;
+  color: #e6edf7;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(34, 211, 238, .25);
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/[0.08] bg-white/[0.035] backdrop-blur-xl;
+  }
+
+  .panel {
+    @apply rounded-2xl border border-white/[0.08] bg-[#0a1220]/90 shadow-glow;
+  }
+
+  .cr-panel {
+    @apply rounded-2xl border border-white/[0.08] bg-[#0a1220]/90 shadow-glow overflow-hidden;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300/70 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-5 py-3 font-semibold text-slate-100 transition hover:bg-white/[0.09] focus:outline-none focus:ring-2 focus:ring-cyan-300/50;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-white/10 bg-[#07101c] px-3.5 py-3 text-sm text-slate-100 outline-none transition focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/10;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+.code-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.code-scroll::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, .18);
+  border-radius: 999px;
+}
+
+.code-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.coderush-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* ── Code display (race area) ──────────────────────────── */
+.race-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  tab-size: 2;
+  margin: 0;
+}
+
+/* Line number gutter */
+.cr-gutter {
+  display: flex;
+  flex-direction: column;
+  min-width: 3rem;
+  padding: 1.25rem 0.75rem 1.25rem 0.75rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.18);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.cr-line-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #334155;
+  text-align: right;
+  transition: color 0.15s ease;
+}
+
+.cr-line-num-active {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* Code body */
+.cr-code-body {
+  padding: 1.25rem 1.5rem;
+}
+
+.cr-code-line {
+  display: block;
+  min-height: 1.8em;
+  border-radius: 4px;
+  padding: 0 4px;
+  margin: 0 -4px;
+  transition: background 0.1s ease;
+}
+
+.cr-active-line {
+  background: rgba(34, 211, 238, 0.04);
+}
+
+/* Individual character states — no backgrounds, only colors */
+.cr-char {
+  display: inline;
+  transition: color 0.08s ease;
+  position: relative;
+}
+
+.cr-char-untyped {
+  color: #475569;
+}
+
+.cr-char-correct {
+  color: #86efac;
+}
+
+/* green-300 */
+.cr-char-incorrect {
+  color: #fda4af;
+  /* rose-300 */
+  text-decoration: underline wavy rgba(251, 113, 133, 0.7);
+  text-underline-offset: 3px;
+}
+
+/* Cursor: blinking vertical bar via ::before pseudo */
+.cr-char-cursor {
+  position: relative;
+}
+
+.cr-char-cursor::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 0.1em;
+  bottom: 0.1em;
+  width: 2px;
+  border-radius: 2px;
+  background: #22d3ee;
+  animation: cr-blink 1s step-end infinite;
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.75);
+}
+
+@keyframes cr-blink {
+
+  0%,
+  100% {
+    opacity: 1;
   }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+  50% {
+    opacity: 0;
   }
+}
+
+/* Newline hint symbol (↵) shown at cursor position on a newline */
+.cr-newline-hint {
+  color: rgba(34, 211, 238, 0.35);
+  font-size: 11px;
+  margin-right: 2px;
+  vertical-align: middle;
+}
+
+/* Legend cursor preview */
+.cr-legend-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 12px;
+  border-radius: 2px;
+  background: #22d3ee;
+  vertical-align: middle;
+  box-shadow: 0 0 4px rgba(34, 211, 238, 0.6);
+}
+
+/* Invisible textarea overlay */
+.race-input {
+  tab-size: 2;
+  caret-color: transparent;
+}
+
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+  animation-duration: .001ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: .001ms !important;
 }
