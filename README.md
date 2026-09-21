@@ -1,16 +1,30 @@
-# React + Vite
+# Language typing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Language typing is a frontend-only developer typing-race app inspired by TypeRacer. Instead of prose, it generates random programming-code snippets and measures how quickly and accurately you can reproduce them.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React + Vite
+- JavaScript
+- Tailwind CSS
+- `@whitep4nth3r/random-code`
+- `lucide-react`
+- Browser LocalStorage for settings, race history, and derived progress
 
-## React Compiler
+There is **no backend, API server, database, authentication, API key, or deployment service**.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run locally
 
-## Expanding the ESLint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Then open the local Vite URL shown in the terminal.
+
+For a production build:
+
+```bash
+npm run build
+npm run preview
+```
