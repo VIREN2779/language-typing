@@ -28,3 +28,11 @@ For a production build:
 npm run build
 npm run preview
 ```
+
+## Deployment
+
+This project is deployed on [Vercel](https://vercel.com).
+
+Vercel auto-detects the Vite build settings:
+- **Build command:** `npm run build`
+- **Output directory:** `dist`
